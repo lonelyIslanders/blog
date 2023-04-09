@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签, 比特牛牛">
-    <meta name="description" content="比特牛牛">
+    <meta name="keywords" content="树梅派旁路由, 比特牛牛">
+    <meta name="description" content="说明利用树梅派4b刷入OpenWrt系统，作为主路由的旁路由实现按需科学上网
+准备工作1.选择合适的Pi 4B OpenWrt固件，这里推荐OpenWrt-Rpi，涵盖了多种系统架构的不同型号的设备类型，自行探索。有能力者也可以选择官方固件">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签 | 比特牛牛</title>
+    <title>树梅派旁路由 | 比特牛牛</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -317,206 +318,466 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                TO DO
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "我想搞钱啊啊",
-                            
-                                "我特别想搞钱啊啊啊啊啊啊啊",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">树梅派旁路由</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%A0%91%E6%A2%85%E6%B4%BE/">
+                                <span class="chip bg-color">树梅派</span>
+                            </a>
+                        
+                            <a href="/tags/OpenWrt/">
+                                <span class="chip bg-color">OpenWrt</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-04-09
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>利用树梅派4b刷入OpenWrt系统，作为主路由的旁路由实现按需科学上网</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.选择合适的Pi 4B OpenWrt固件，这里推荐<a target="_blank" rel="noopener" href="https://github.com/SuLingGG/OpenWrt-Rpi">OpenWrt-Rpi</a>，涵盖了多种系统架构的不同型号的设备类型，自行探索。有能力者也可以选择官方固件或其它固件自行编译。<br>比如这里我们选择<code>immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img.gz</code>，即树梅派4B ext4格式全新固件。<br>还需要树梅派镜像烧录工具，如官方的<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>，或者其它三方工具。<br>这里烧录过程就跳过了。</p>
+<h2 id="进入OpenWrt系统"><a href="#进入OpenWrt系统" class="headerlink" title="进入OpenWrt系统"></a>进入OpenWrt系统</h2><p>1.这里我出现了个奇怪的问题，刷好系统后正常情况下会搜到OpenWrt的WIFI信号，我却搜不到，而且进入系统没有无线设置和无限接口，无奈只好网线接入电脑。有知道什么原因的可以发邮件告知我一下，谢谢！</p>
+<p>2.浏览器地址栏输入192.168.1.1，最好断开你的WIFI链接，防止登入的是你的宽带控制台。用户名root，密码root或password。<br><img src="https://i.328888.xyz/2023/04/09/icNHWC.png" alt="OpenWrt登陆界面"></p>
+<p>3.进来后选择左侧<code>网络--&gt;接口--&gt;LAN</code>，直接修改传输协议为静态地址，IPv4地址为你的主路由DHCP分发段内任一未被占用地址，比如我的小米路由器<code>192.168.31.1</code>，其下发可选5-254，如你可以选择<code>192.168.31.100</code>作为你的OpenWrt IPv4地址，掩码<code>255.255.255.0</code>，IPV4网关为你的主路由管理地址，如我的<code>192.168.31.1</code>，使用自定义的 DNS 服务器也为<code>192.168.31.1</code>，下拉基本设置，<code>忽略此接口</code>，保存&amp;应用即可。<br><img src="https://i.328888.xyz/2023/04/09/icNcEN.png" alt="接口设置"></p>
+<p>4.同样<code>网络--&gt;防火墙--&gt;自定义规则</code>，追加<code>iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE</code>，然后重启防火墙即可。这句规则意思在NAT表中插入一条规则，表示对经过eth0接口出去的数据进行源地址伪装，使其看起来像是从本机发出的。这是一种网络地址转换技术，通常用于多个局域网之间或局域网与互联网之间的互联。</p>
+<p>5.添加科学上网方式，选择<code>服务--&gt;ShadowSocksR Plus+</code>，可以在这里添加你的科学上网方式，节点什么的，可以自性搭建获取其它购买的节点，也可以在<code>服务--&gt;PassWall</code>中添加(建议)，规则啊、更新什么的自己探索咯，确保最后树梅派测试访问google成功即可。<br><img src="https://i.328888.xyz/2023/04/09/icNeda.png" alt="PassWall"></p>
+<p>6.至此其实都已经完成，把你的树梅派RJ-45网口用网线连接你的路由器任一LAN口即可，这里插一嘴，如果你的带宽过百兆，主路由的LAN口是千兆级别，那么最好网线换成超5类及以上。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>1.这里使用可以在你的主路由设置局域网DHCP，把网关设置为树梅派的IP，如上文<code>192.168.31.100</code>，这样所有连接主路由的设备流量都会去旁路由处理，能够实现终端无感科学上网。</p>
+<p>2.也可以终端设置单独科学上网，比如你的电脑，这里Linux为例，<code>设置--&gt;你的WIFI或网络--&gt;WIFI旁边的齿轮--&gt;IPv4</code>，选择IPv4方式为<code>手动</code>，地址输入比如<code>192.168.31.101</code>，这个也是和上面一样的主路由DHCP的IP池中任一未被占用的IP，掩码<code>24或255.255.255.0</code>，网关为旁路由IP，<code>192.168.31.100</code>，DNS为<code>192.168.31.100</code>，关闭自动路由即可，若访问google失败，可以关闭WIFI再打开即可科学上网。这里科学上网是全局的，即终端（terminal）也可以翻墙。<br><img src="https://i.328888.xyz/2023/04/09/ic3lnC.png" alt="Linux网络设置"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">牛牛🐮</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://npmcow.com/2023/04/09/shu-mei-pai-pang-lu-you/">https://npmcow.com/2023/04/09/shu-mei-pai-pang-lu-you/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">牛牛🐮</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%A0%91%E6%A2%85%E6%B4%BE/">
+                                    <span class="chip bg-color">树梅派</span>
+                                </a>
+                            
+                                <a href="/tags/OpenWrt/">
+                                    <span class="chip bg-color">OpenWrt</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">
+                多谢多谢多谢
+            </h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微~信</a></li>
+                        <li class="tab col s6 token-tab waves-effect waves-light"><a href="#token">加密货币</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.bmp" class="reward-img"
+                            alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechatpay.bmp" class="reward-img"
+                            alt="微信打赏二维码">
+                    </div>
+                    <div id="token">
+                        <img src="/medias/reward/tokenpay.bmp" class="reward-img"
+                            alt="token打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $(function () {
+        $('.tabs').tabs();
+    });
 </script>
-
-
+            
+        </div>
     </div>
-</div>
-
-<main class="content">
 
     
 
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/other/" title="other: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="other" style="background-color: #F9EBEA;">other
-                        <span class="tag-length">1</span>
-                    </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/04/09/xiao-mi-lu-you-qi-4a-qian-zhao-ban-r4a-shua-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="小米路由器4A千兆版(R4A)刷机">
+                        
+                        <span class="card-title">小米路由器4A千兆版(R4A)刷机</span>
+                    </div>
                 </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            牛牛🐮
+                            
+                        </span>
+                    </div>
+                </div>
                 
-                
-                <a href="/tags/nginx/" title="nginx: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="nginx" style="background-color: #F5EEF8;">nginx
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/hexo/" title="hexo: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="hexo" style="background-color: #D5F5E3;">hexo
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Linux/" title="Linux: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" style="background-color: #E8F8F5;">Linux
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/CDN/" title="CDN: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="CDN" style="background-color: #FEF9E7;">CDN
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%9F%9F%E5%90%8D/" title="域名: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="域名" style="background-color: #F8F9F9;">域名
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/SSL/" title="SSL: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="SSL" style="background-color: #82E0AA;">SSL
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E8%AF%81%E4%B9%A6/" title="证书: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="证书" style="background-color: #D7BDE2;">证书
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Nginx/" title="Nginx: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Nginx" style="background-color: #A3E4D7;">Nginx
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%A0%91%E6%A2%85%E6%B4%BE/" title="树梅派: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="树梅派" style="background-color: #85C1E9;">树梅派
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/OpenWrt/" title="OpenWrt: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="OpenWrt" style="background-color: #F8C471;">OpenWrt
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" title="路由器: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="路由器" style="background-color: #F9E79F;">路由器
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/OpenWrt/">
+                        <span class="chip bg-color">OpenWrt</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">
+                        <span class="chip bg-color">路由器</span>
+                    </a>
+                    
+                </div>
                 
             </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/17/ssl-zheng-shu-shen-qing-he-nginx-pei-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="SSL证书申请和Nginx配置">
+                        
+                        <span class="card-title">SSL证书申请和Nginx配置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            牛牛🐮
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SSL/">
+                        <span class="chip bg-color">SSL</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%81%E4%B9%A6/">
+                        <span class="chip bg-color">证书</span>
+                    </a>
+                    
+                    <a href="/tags/Nginx/">
+                        <span class="chip bg-color">Nginx</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
         </div>
     </div>
 </div>
 
-    
-    <link rel="stylesheet" type="text/css" href="/libs/jqcloud/jqcloud.css">
-<style type="text/css">
-    #tag-wordcloud {
-        width: 100%;
-        height: 300px;
-    }
-</style>
+<!-- TOC 悬浮按钮. -->
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="tag-wordcloud" class="card-content"></div>
-    </div>
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
 </div>
 
-<script type="text/javascript" src="/libs/jqcloud/jqcloud-1.0.4.min.js"></script>
-<script type="text/javascript">
-    
 
-    $('#tag-wordcloud').jQCloud([{"text":"other","weight":1,"link":"/tags/other/"},{"text":"nginx","weight":1,"link":"/tags/nginx/"},{"text":"hexo","weight":1,"link":"/tags/hexo/"},{"text":"Linux","weight":1,"link":"/tags/Linux/"},{"text":"CDN","weight":1,"link":"/tags/CDN/"},{"text":"域名","weight":1,"link":"/tags/域名/"},{"text":"SSL","weight":1,"link":"/tags/SSL/"},{"text":"证书","weight":1,"link":"/tags/证书/"},{"text":"Nginx","weight":1,"link":"/tags/Nginx/"},{"text":"树梅派","weight":1,"link":"/tags/树梅派/"},{"text":"OpenWrt","weight":2,"link":"/tags/OpenWrt/"},{"text":"路由器","weight":1,"link":"/tags/路由器/"}], {
-        autoResize: true
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
     });
 </script>
 
     
 
 </main>
+
+
 
 
     <footer class="page-footer bg-color">
