@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="小米路由器4A千兆版(R4A)刷机, 比特牛牛">
-    <meta name="description" content="说明小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去恩山论坛多探索探索
-准备1.小米路由器4A千兆版(R4A)OpenWrt固件2.小米路由器4A千兆版(R4A)breed固件3.适用于小米路">
+    <meta name="description" content="说明小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去恩山论坛多探索探索(
+准备1.小米路由器4A千兆版(R4A)OpenWrt固件2.小米路由器4A千兆版(R4A)breed固件3.适用于小米">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -395,22 +395,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>多探索探索</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.小米路由器4A千兆版(R4A)OpenWrt固件<br>2.小米路由器4A千兆版(R4A)breed固件<br>3.适用于小米路由器的python工具包，用于开启22(ssh)、23(telnet)端口</p>
-<h2 id="开启Telnet"><a href="#开启Telnet" class="headerlink" title="开启Telnet"></a>开启Telnet</h2><p>1.去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>找个工具包或者下载我准备好的，别人那里淘来的，本生涵盖了小米4C的刷机包，别写入包自带的breed就行</p>
-<p>2.如下图，我这是Linux，所以批处理文件无法运行，其实也可以运行main.py就行<br><img src="https://i.328888.xyz/2023/04/09/icxfiC.png" alt="刷入telnet"></p>
+                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>多探索探索<br>(</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.小米路由器4A千兆版(R4A)OpenWrt固件<br>2.小米路由器4A千兆版(R4A)breed固件<br>3.适用于小米路由器的python工具包，用于开启21(ftp)、23(telnet)端口</p>
+<h2 id="开启Telnet"><a href="#开启Telnet" class="headerlink" title="开启Telnet"></a>开启Telnet</h2><p>1.去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>找个工具包或者下载我准备好的<a target="_blank" rel="noopener" href="https://release.npmcow.com/OpenWrt/mi4Atools.tgz">这里</a>，别人那里淘来的，不记得链接了，但还是感谢大佬</p>
+<p>2.如下图，我这是Linux，所以批处理文件无法运行，其实也可以运行main.py就行，具体看你下载的工具包结构<br><img src="https://i.328888.xyz/2023/04/09/icxfiC.png" alt="刷入telnet"></p>
 <p>3.输入路由器的管理密码，出现Done就行，倘若出现以下报错<br><img src="https://i.328888.xyz/2023/04/09/icxzUF.png" alt="刷入Telnet报错"></p>
 <p>4.我们直接打开main.py文件，找到报错行37,直接修改如下，stok登陆你的路由后台，如192.168.31.1，浏览器地址栏自行获取<br><img src="https://i.328888.xyz/2023/04/09/ic7Afp.png" alt="手动设置stok"></p>
 <p>5.重新执行刚才的批处理文件或者python文件，出现telnet+ftp把啦把拉，Done即可</p>
 <h2 id="连接路由器及备份"><a href="#连接路由器及备份" class="headerlink" title="连接路由器及备份"></a>连接路由器及备份</h2><p>1.直接打开终端或者其它工具，输入<code>telnet 192.168.31.1</code>，用户名<code>root</code>，这里IP根据你自己的路由器管理地址决定哦。<br><img src="https://i.328888.xyz/2023/04/09/ic7gIV.png" alt="登陆路由器"></p>
 <p>2.重要的一步，备份文件，输入df -h，查看你的分区名称，比如我的mtd3，则直接输入<code>dd if=/dev/mtd3 of=/tmp/eeprom.bin</code>，会在&#x2F;tmp&#x2F;目录下生成一个eeprom.bin文件，这玩意后续提升你的5G信号有大大的作用<br><img src="https://i.328888.xyz/2023/04/09/ic7LP5.png" alt="备份文件"></p>
+<p>3.例如Windows，直接用终端，输入<code>ftp 192.168.31.1</code>，进入小米路由器ftp界面，再输入<code>get /tmp/eeprom.bin</code>，文件可能保存在C:&#x2F;User&#x2F;xxx&#x2F;<br>你也可以使用第三方的GUI界面的ftp软件</p>
 <h2 id="刷入breed"><a href="#刷入breed" class="headerlink" title="刷入breed"></a>刷入breed</h2><p>1.breed就是一个BootLoader，就相当于windows的BIOS，就是刷入成功后，无论你的OpenWrt再怎么折腾，系统乱七八糟，都可以通过breed恢复，即用来刷OpenWrt固件或其它系统。<br>我们需要选择合适的breed系统，可以去<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">这里</a>下载，也可以使用我准备好的。<br>虽然小米路由器这个小Linux大部分命令都没有，但wget还在，可以直接wget你的breed文件，后面也可以wget你的固件，或者用其它工具包集成的功能，可以一键刷入breed，推荐<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-6116247-1-1.html">这里</a></p>
 <p>2.上面准备好了后就是写入breed了，假如你的breed.bin在<code>/tmp/</code>目录下，就叫breed.bin，输入<code>cd /tmp &amp;&amp; mtd write breed.bin Bootloader</code>，出现<code>Rebooting</code>，稍等几秒便会断开并丢失WIFI连接，路由器重启了，等黄灯闪烁结束</p>
 <p>3.找一根网线连接电脑和路由器Lan口，或者连接发出的OpenWrt开放WIFI，浏览器地址栏输入<code>192.168.1.1</code>，若打开的是你的光猫登陆界面，那么把你连接的别的WIFI关掉哦，如下<br><img src="https://i.328888.xyz/2023/04/09/iceH6C.png" alt="breed控制台"></p>
 <h2 id="刷入OpenWrt固件"><a href="#刷入OpenWrt固件" class="headerlink" title="刷入OpenWrt固件"></a>刷入OpenWrt固件</h2><p>1.控制台选择本地已经准备好的固件，<code>上传--&gt;更新</code>，记住要选择EEPROM，选择之前备份好的eeprom.bin，一并上传，过程及结果如下，完成后路由器会重启且闪烁黄灯，一会儿后变双蓝灯<br><img src="https://i.328888.xyz/2023/04/09/iceuxX.png" alt="写入OpenWrt"><br><img src="https://i.328888.xyz/2023/04/09/iczysA.png" alt="完成OpenWrt"></p>
 <p>2.等双蓝灯亮起，搜索OpenWrt的开放WIFI接入，浏览器输入<code>192.168.1.1</code>，密码一般root或password进入</p>
 <h2 id="OpenWrt系统设置"><a href="#OpenWrt系统设置" class="headerlink" title="OpenWrt系统设置"></a>OpenWrt系统设置</h2><p>1.虽然刷入OpenWrt后可以进行更好的桥接功能，但我还是保留光猫拨号，路由DHCP，这样不影响另外的路由器功能使用<br>我们进入后找到<code>网络--&gt;接口--&gt;WAN</code>修改为DHCP，<code>LAN</code>口为静态地址IP，比如<code>192.168.2.1</code>，保存&amp;应用后，后续进入这个管理界面就是<code>192.168.2.1</code>了</p>
-<p>2.设置科学上网，找到<code>服务--&gt;ShadowSocksR Plus+ --&gt;服务器节点--&gt;添加</code>，输入你的节点信息，保存&amp;应用，这样基本上就完成啦，<br>更多功能尽情探索吧</p>
+<p>2.可以去修改无线网络信息，如果你的WIFI是2.4G和5G的，去把对应的无线设置修改下，区分出2.4G和5G，前面刷入的eeprom.bin就是为了这里5G信号增强使用的，如果你的5G信号功率很低，设置只有1mw，那么大概率就是eeprom.bin备份错误，刷入了无效的eeprom，但也不要慌，在前面我的工具包里有适配R4A的eeprom.bin，重新刷入即可，工具包<a target="_blank" rel="noopener" href="https://release.npmcow.com/OpenWrt/mi4Atools.tgz">下载连接</a></p>
+<p>3.设置科学上网，找到<code>服务--&gt;ShadowSocksR Plus+ --&gt;服务器节点--&gt;添加</code>，输入你的节点信息，保存&amp;应用，这样基本上就完成啦，<br>更多功能尽情探索吧</p>
 
                 
             </div>
