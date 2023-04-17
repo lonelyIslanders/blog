@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="小米路由器4A千兆版(R4A)刷机, 比特牛牛">
-    <meta name="description" content="说明小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去恩山论坛多探索探索(
-准备1.小米路由器4A千兆版(R4A)OpenWrt固件2.小米路由器4A千兆版(R4A)breed固件3.适用于小米">
+    <meta name="keywords" content="nginx之stream模块, 比特牛牛">
+    <meta name="description" content="介绍nginx的stream模块一般用于TCP&amp;#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量（代理挖矿流量，中国大陆用户需要一台境外">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>小米路由器4A千兆版(R4A)刷机 | 比特牛牛</title>
+    <title>nginx之stream模块 | 比特牛牛</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -322,12 +321,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">小米路由器4A千兆版(R4A)刷机</h1>
+                    <h1 class="description center-align post-title">nginx之stream模块</h1>
                 </div>
             </div>
         </div>
@@ -349,17 +348,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/OpenWrt/">
-                                <span class="chip bg-color">OpenWrt</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">
-                                <span class="chip bg-color">路由器</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -371,7 +362,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-09
+                    2023-04-11
                 </div>
                 
 
@@ -395,24 +386,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>小米路由器4A千兆版(R4A)刷入OpenWrt系统，完善WIFI功能（主要是科学上网），可以去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>多探索探索<br>(</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.小米路由器4A千兆版(R4A)OpenWrt固件<br>2.小米路由器4A千兆版(R4A)breed固件<br>3.适用于小米路由器的python工具包，用于开启21(ftp)、23(telnet)端口</p>
-<h2 id="开启Telnet"><a href="#开启Telnet" class="headerlink" title="开启Telnet"></a>开启Telnet</h2><p>1.去<a target="_blank" rel="noopener" href="https://right.com.cn/">恩山论坛</a>找个工具包或者下载我准备好的<a target="_blank" rel="noopener" href="https://release.npmcow.com/OpenWrt/mi4Atools.tgz">这里</a>，别人那里淘来的，不记得链接了，但还是感谢大佬</p>
-<p>2.如下图，我这是Linux，所以批处理文件无法运行，其实也可以运行main.py就行，具体看你下载的工具包结构<br><img src="https://i.328888.xyz/2023/04/09/icxfiC.png" alt="刷入telnet"></p>
-<p>3.输入路由器的管理密码，出现Done就行，倘若出现以下报错<br><img src="https://i.328888.xyz/2023/04/09/icxzUF.png" alt="刷入Telnet报错"></p>
-<p>4.我们直接打开main.py文件，找到报错行37,直接修改如下，stok登陆你的路由后台，如192.168.31.1，浏览器地址栏自行获取<br><img src="https://i.328888.xyz/2023/04/09/ic7Afp.png" alt="手动设置stok"></p>
-<p>5.重新执行刚才的批处理文件或者python文件，出现telnet+ftp把啦把拉，Done即可</p>
-<h2 id="连接路由器及备份"><a href="#连接路由器及备份" class="headerlink" title="连接路由器及备份"></a>连接路由器及备份</h2><p>1.直接打开终端或者其它工具，输入<code>telnet 192.168.31.1</code>，用户名<code>root</code>，这里IP根据你自己的路由器管理地址决定哦。<br><img src="https://i.328888.xyz/2023/04/09/ic7gIV.png" alt="登陆路由器"></p>
-<p>2.重要的一步，备份文件，输入df -h，查看你的分区名称，比如我的mtd3，则直接输入<code>dd if=/dev/mtd3 of=/tmp/eeprom.bin</code>，会在&#x2F;tmp&#x2F;目录下生成一个eeprom.bin文件，这玩意后续提升你的5G信号有大大的作用<br><img src="https://i.328888.xyz/2023/04/09/ic7LP5.png" alt="备份文件"></p>
-<p>3.例如Windows，直接用终端，输入<code>ftp 192.168.31.1</code>，进入小米路由器ftp界面，再输入<code>get /tmp/eeprom.bin</code>，文件可能保存在C:&#x2F;User&#x2F;xxx&#x2F;<br>你也可以使用第三方的GUI界面的ftp软件</p>
-<h2 id="刷入breed"><a href="#刷入breed" class="headerlink" title="刷入breed"></a>刷入breed</h2><p>1.breed就是一个BootLoader，就相当于windows的BIOS，就是刷入成功后，无论你的OpenWrt再怎么折腾，系统乱七八糟，都可以通过breed恢复，即用来刷OpenWrt固件或其它系统。<br>我们需要选择合适的breed系统，可以去<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">这里</a>下载，也可以使用我准备好的。<br>虽然小米路由器这个小Linux大部分命令都没有，但wget还在，可以直接wget你的breed文件，后面也可以wget你的固件，或者用其它工具包集成的功能，可以一键刷入breed，推荐<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-6116247-1-1.html">这里</a></p>
-<p>2.上面准备好了后就是写入breed了，假如你的breed.bin在<code>/tmp/</code>目录下，就叫breed.bin，输入<code>cd /tmp &amp;&amp; mtd write breed.bin Bootloader</code>，出现<code>Rebooting</code>，稍等几秒便会断开并丢失WIFI连接，路由器重启了，等黄灯闪烁结束</p>
-<p>3.找一根网线连接电脑和路由器Lan口，或者连接发出的OpenWrt开放WIFI，浏览器地址栏输入<code>192.168.1.1</code>，若打开的是你的光猫登陆界面，那么把你连接的别的WIFI关掉哦，如下<br><img src="https://i.328888.xyz/2023/04/09/iceH6C.png" alt="breed控制台"></p>
-<h2 id="刷入OpenWrt固件"><a href="#刷入OpenWrt固件" class="headerlink" title="刷入OpenWrt固件"></a>刷入OpenWrt固件</h2><p>1.控制台选择本地已经准备好的固件，<code>上传--&gt;更新</code>，记住要选择EEPROM，选择之前备份好的eeprom.bin，一并上传，过程及结果如下，完成后路由器会重启且闪烁黄灯，一会儿后变双蓝灯<br><img src="https://i.328888.xyz/2023/04/09/iceuxX.png" alt="写入OpenWrt"><br><img src="https://i.328888.xyz/2023/04/09/iczysA.png" alt="完成OpenWrt"></p>
-<p>2.等双蓝灯亮起，搜索OpenWrt的开放WIFI接入，浏览器输入<code>192.168.1.1</code>，密码一般root或password进入</p>
-<h2 id="OpenWrt系统设置"><a href="#OpenWrt系统设置" class="headerlink" title="OpenWrt系统设置"></a>OpenWrt系统设置</h2><p>1.虽然刷入OpenWrt后可以进行更好的桥接功能，但我还是保留光猫拨号，路由DHCP，这样不影响另外的路由器功能使用<br>我们进入后找到<code>网络--&gt;接口--&gt;WAN</code>修改为DHCP，<code>LAN</code>口为静态地址IP，比如<code>192.168.2.1</code>，保存&amp;应用后，后续进入这个管理界面就是<code>192.168.2.1</code>了</p>
-<p>2.可以去修改无线网络信息，如果你的WIFI是2.4G和5G的，去把对应的无线设置修改下，区分出2.4G和5G，前面刷入的eeprom.bin就是为了这里5G信号增强使用的，如果你的5G信号功率很低，设置只有1mw，那么大概率就是eeprom.bin备份错误，刷入了无效的eeprom，但也不要慌，在前面我的工具包里有适配R4A的eeprom.bin，重新刷入即可，工具包<a target="_blank" rel="noopener" href="https://release.npmcow.com/OpenWrt/mi4Atools.tgz">下载连接</a></p>
-<p>3.设置科学上网，找到<code>服务--&gt;ShadowSocksR Plus+ --&gt;服务器节点--&gt;添加</code>，输入你的节点信息，保存&amp;应用，这样基本上就完成啦，<br>更多功能尽情探索吧</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>nginx的stream模块一般用于TCP&#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量（代理挖矿流量，中国大陆用户需要一台境外服务器）</p>
+<h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>1.备份永远都是重要的一步，防止后续操作有误能及时恢复<br>2.一般来说nginx的二进制文件在<code>/usr/sbin/</code>目录下，我们执行<code>cp /usr/sbin/nginx /usr/sbin/nginx.bck</code><br>3.若你是使用<code>/etc/nginx/nginx.conf</code>或<code>/etc/nginx/conf.d/*.conf</code>等原有配置文件，那么也要备份下</p>
+<h1 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h1><p>1.下载nginx安装包，解压，官网<a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">地址</a></p>
+<p>2.比如1.18.0安装包，我们使用wget下载，若没有自行安装wget一下，<code>wget https://nginx.org/download/nginx-1.18.0.tar.gz</code><br><img src="https://i.328888.xyz/2023/04/11/ipjsN5.png" alt="下载解压安装包"></p>
+<p>3.进入解压后目录，<code>cd nginx-1.18.0/</code>，使用<code>nginx -V</code>先查看目前我们的模块配置，configure arguments之后的即是我们的目前配置<br><img src="https://i.328888.xyz/2023/04/11/ipjTkE.png" alt="现有模块"></p>
+<p>4.安装依赖库，只例举了一些常见报错所需要的依赖库<br><code>apt install libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libssl-dev</code></p>
+<p>4.输入<code>./configure </code>粘贴上现有模块内容，后面再加上<code>--with-stream</code>回车即可<br><img src="https://i.328888.xyz/2023/04/11/ip8p1H.png" alt="添加stream模块"></p>
+<p>5.完成如下<br><img src="https://i.328888.xyz/2023/04/11/ipr9UE.png" alt="configure完成"></p>
+<p>6.执行<code>make</code>，等待一两分钟后无保错即可</p>
+<p>7.替换nginx，先停止nginx，<code>systemctl stop nginx</code>，再执行<code>cp objs/nginx /usr/sbin/nginx</code>，即替换原有nginx</p>
+<h2 id="配置nginx-stream"><a href="#配置nginx-stream" class="headerlink" title="配置nginx stream"></a>配置nginx stream</h2><p>1.新建个配置文件，例如，<code>vim /etc/nginx/site-enable/proxy_domain_com</code>，写入如下，保存退出</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
+    upstream f2pool &#123;
+        server cfxssl.f2pool.com:6820;
+    &#125;
+        server &#123;
+            listen  6820;
+            proxy_pass  f2pool;
+        &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.重启nginx，<code>systemctl restart nginx</code>，不报错即可</p>
+<p>3.这样你的挖矿代理就完成了，运行在你的服务器ip或域名的6820端口，比如用NBMiner挖CFX coin，具体替换成对应矿池的设置<br><code>./NBMiner_Linux/nbminer -a octopus -o stratum+ssl://你的ip或域名 -u penju</code></p>
+<p>4.因为连接的矿池的ssl地址，所以这里的ssl加密就不必要了，倘若要使用矿池的TCP连接，这里就可以继续配置SSL加密，如</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
+    upstream f2pool &#123;
+        server cfxssl.f2pool.com:6820;
+    &#125;
+        server &#123;
+            listen  6820    ssl;
+            proxy_pass  f2pool;
+            ssl_certificate &#x2F;var&#x2F;www&#x2F;ssl&#x2F;yourcer.cer;
+            ssl_certificate_key &#x2F;var&#x2F;www&#x2F;ssl&#x2F;yourkey.key;
+        &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>5.这样一个无损代理挖矿流量的中转就完成了，让您无惧黑心不良抽水第三方！</p>
 
                 
             </div>
@@ -439,7 +448,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://npmcow.com/2023/04/09/xiao-mi-lu-you-qi-4a-qian-zhao-ban-r4a-shua-ji/">https://npmcow.com/2023/04/09/xiao-mi-lu-you-qi-4a-qian-zhao-ban-r4a-shua-ji/</a>
+                    <a href="https://npmcow.com/2023/04/11/nginx-zhi-stream-mo-kuai/">https://npmcow.com/2023/04/11/nginx-zhi-stream-mo-kuai/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -476,15 +485,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/OpenWrt/">
-                                    <span class="chip bg-color">OpenWrt</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">
-                                    <span class="chip bg-color">路由器</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -569,9 +570,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/04/11/nginx-zhi-stream-mo-kuai/">
                     <div class="card-image">
@@ -589,9 +591,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -600,6 +602,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -610,13 +613,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/09/shu-mei-pai-pang-lu-you/">
+                <a href="/2023/04/09/xiao-mi-lu-you-qi-4a-qian-zhao-ban-r4a-shua-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="树梅派旁路由">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="小米路由器4A千兆版(R4A)刷机">
                         
-                        <span class="card-title">树梅派旁路由</span>
+                        <span class="card-title">小米路由器4A千兆版(R4A)刷机</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -640,12 +643,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%A0%91%E6%A2%85%E6%B4%BE/">
-                        <span class="chip bg-color">树梅派</span>
-                    </a>
-                    
                     <a href="/tags/OpenWrt/">
                         <span class="chip bg-color">OpenWrt</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">
+                        <span class="chip bg-color">路由器</span>
                     </a>
                     
                 </div>
