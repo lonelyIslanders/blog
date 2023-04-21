@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="nginx之stream模块, 比特牛牛">
-    <meta name="description" content="介绍nginx的stream模块一般用于TCP&amp;#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量（代理挖矿流量，中国大陆用户需要一台境外">
+    <meta name="description" content="介绍1.nginx的stream模块一般用于TCP&amp;#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量以及一些其它用途（代理挖矿流量，中国">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -386,16 +386,34 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>nginx的stream模块一般用于TCP&#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量（代理挖矿流量，中国大陆用户需要一台境外服务器）</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>1.nginx的stream模块一般用于TCP&#x2F;UDP数据流的转发和负载均衡，此模块在nginx 1.9.0开始提供，下面我们举例如何使用nginx的stream模块进行加密转发代理挖矿流量以及一些其它用途（代理挖矿流量，中国大陆用户需要一台境外服务器）<br>2.更新，调整至最新稳定版1.24.0，去除动态模块，完全编译安装，抛弃apt install，只安装一些必要模块</p>
 <h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>1.备份永远都是重要的一步，防止后续操作有误能及时恢复<br>2.一般来说nginx的二进制文件在<code>/usr/sbin/</code>目录下，我们执行<code>cp /usr/sbin/nginx /usr/sbin/nginx.bck</code><br>3.若你是使用<code>/etc/nginx/nginx.conf</code>或<code>/etc/nginx/conf.d/*.conf</code>等原有配置文件，那么也要备份下</p>
 <h1 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h1><p>1.下载nginx安装包，解压，官网<a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">地址</a></p>
-<p>2.比如1.18.0安装包，我们使用wget下载，若没有自行安装wget一下，<code>wget https://nginx.org/download/nginx-1.18.0.tar.gz</code><br><img src="https://i.328888.xyz/2023/04/11/ipjsN5.png" alt="下载解压安装包"></p>
-<p>3.进入解压后目录，<code>cd nginx-1.18.0/</code>，使用<code>nginx -V</code>先查看目前我们的模块配置，configure arguments之后的即是我们的目前配置<br><img src="https://i.328888.xyz/2023/04/11/ipjTkE.png" alt="现有模块"></p>
-<p>4.安装依赖库，只例举了一些常见报错所需要的依赖库<br><code>apt install libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libssl-dev</code></p>
-<p>4.输入<code>./configure </code>粘贴上现有模块内容，后面再加上<code>--with-stream</code>回车即可<br><img src="https://i.328888.xyz/2023/04/11/ip8p1H.png" alt="添加stream模块"></p>
+<p>2.比如1.24.0稳定版安装包，我们使用wget下载，若没有自行安装wget一下，<code>wget https://nginx.org/download/nginx-1.24.0.tar.gz</code><br><img src="https://i.328888.xyz/2023/04/19/i6LwUU.png" alt="下载解压安装包"></p>
+<p>3.进入解压后目录，<code>cd nginx-1.24.0/</code></p>
+<p>4.安装依赖库，只例举了一些常见报错所需要的依赖库<br><code>apt install libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libssl-dev libmaxminddb-dev libgeoip-dev</code></p>
+<p>4.输入</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx \
+--user&#x3D;nginx --group&#x3D;nginx \
+--with-http_gzip_static_module \
+--with-http_flv_module \
+--with-http_ssl_module \
+--with-http_realip_module \
+--with-http_v2_module \
+--with-http_sub_module \
+--with-http_mp4_module \
+--with-http_stub_status_module \
+--with-http_gzip_static_module \
+--with-pcre --with-stream \
+--with-stream_ssl_module \
+--with-stream_realip_module \
+--with-stream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://i.328888.xyz/2023/04/19/i6L76J.png" alt="添加stream模块"></p>
 <p>5.完成如下<br><img src="https://i.328888.xyz/2023/04/11/ipr9UE.png" alt="configure完成"></p>
-<p>6.执行<code>make</code>，等待一两分钟后无保错即可</p>
-<p>7.替换nginx，先停止nginx，<code>systemctl stop nginx</code>，再执行<code>cp objs/nginx /usr/sbin/nginx</code>，即替换原有nginx</p>
+<p>6.执行<code>make &amp; make install</code>，等待一两分钟后无报错即可，如果报错<code>nginx: [emerg] getpwnam(&quot;nginx&quot;) failed</code>，<br>解决<code>useradd nginx -s /sbin/nologin -M</code></p>
+<p>7.后续nginx可执行文件在<code>/usr/sbin/nginx</code>，我们接下来需要写个systemd来控制nginx，<code>vim /etc/systemd/system/nginx.service</code></p>
+<pre class="line-numbers language-none"><code class="language-none">[Unit] Description&#x3D;Nginx HTTP Server [Service] Type&#x3D;forking PIDFile&#x3D;&#x2F;var&#x2F;run&#x2F;nginx.pid ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx ExecReload&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s reload ExecStop&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s quit User&#x3D;root Group&#x3D;root KillMode&#x3D;process Restart&#x3D;on-failure [Install] WantedBy&#x3D;multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>8.保存退出，重载systemctl<code>systemctl daemon-reload</code></p>
 <h2 id="配置nginx-stream"><a href="#配置nginx-stream" class="headerlink" title="配置nginx stream"></a>配置nginx stream</h2><p>1.新建个配置文件，例如，<code>vim /etc/nginx/site-enable/proxy_domain_com</code>，写入如下，保存退出</p>
 <pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
     upstream f2pool &#123;
@@ -421,7 +439,8 @@
             ssl_certificate_key &#x2F;var&#x2F;www&#x2F;ssl&#x2F;yourkey.key;
         &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>5.这样一个无损代理挖矿流量的中转就完成了，让您无惧黑心不良抽水第三方！</p>
+<p>证书文件使用自签名的就完全OK了</p>
+<p>5.这样一个无损代理挖矿流量的中转就完成了，让您无惧第三方黑心不良抽水！</p>
 
                 
             </div>
@@ -570,18 +589,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/04/11/nginx-zhi-stream-mo-kuai/">
+                <a href="/2023/04/21/da-jian-smtp-fu-wu-ji-you-jian-jie-shou/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="nginx之stream模块">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="搭建SMTP服务及邮件接收">
                         
-                        <span class="card-title">nginx之stream模块</span>
+                        <span class="card-title">搭建SMTP服务及邮件接收</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -591,9 +609,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -602,7 +620,18 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/nodejs/">
+                        <span class="chip bg-color">nodejs</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                        <span class="chip bg-color">后端</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
