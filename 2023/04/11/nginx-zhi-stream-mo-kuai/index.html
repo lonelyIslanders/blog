@@ -403,28 +403,14 @@
 <h1 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h1><p>1.下载nginx安装包，解压，官网<a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">地址</a></p>
 <p>2.比如1.24.0稳定版安装包，我们使用wget下载，若没有自行安装wget一下，<code>wget https://nginx.org/download/nginx-1.24.0.tar.gz</code><br><img src="https://i.328888.xyz/2023/04/19/i6LwUU.png" alt="下载解压安装包"></p>
 <p>3.进入解压后目录，<code>cd nginx-1.24.0/</code></p>
-<p>4.安装依赖库，只例举了一些常见报错所需要的依赖库<br><code>apt install libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libssl-dev libmaxminddb-dev libgeoip-dev</code></p>
+<p>4.安装依赖库，只例举了一些常见报错所需要的依赖库<br><code>apt install libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libssl-dev libmaxminddb-dev libgeoip-dev -y</code></p>
 <p>4.输入</p>
-<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx \
---user&#x3D;nginx --group&#x3D;nginx \
---with-http_gzip_static_module \
---with-http_flv_module \
---with-http_ssl_module \
---with-http_realip_module \
---with-http_v2_module \
---with-http_sub_module \
---with-http_mp4_module \
---with-http_stub_status_module \
---with-http_gzip_static_module \
---with-pcre --with-stream \
---with-stream_ssl_module \
---with-stream_realip_module \
---with-stream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;share&#x2F;nginx --sbin-path&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx --error-log-path&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log --http-log-path&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log --conf-path&#x3D;&#x2F;etc&#x2F;nginx&#x2F;nginx.conf --lock-path&#x3D;&#x2F;var&#x2F;lock&#x2F;nginx.lock --pid-path&#x3D;&#x2F;run&#x2F;nginx.pid --modules-path&#x3D;&#x2F;usr&#x2F;lib&#x2F;nginx&#x2F;modules --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_secure_link_module --with-http_sub_module --with-stream --with-stream_realip_module --with-mail_ssl_module --with-stream_ssl_module --with-stream_ssl_preread_module<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://i.328888.xyz/2023/04/19/i6L76J.png" alt="添加stream模块"></p>
 <p>5.完成如下<br><img src="https://i.328888.xyz/2023/04/11/ipr9UE.png" alt="configure完成"></p>
 <p>6.执行<code>make &amp; make install</code>，等待一两分钟后无报错即可，如果报错<code>nginx: [emerg] getpwnam(&quot;nginx&quot;) failed</code>，<br>解决<code>useradd nginx -s /sbin/nologin -M</code></p>
 <p>7.后续nginx可执行文件在<code>/usr/sbin/nginx</code>，我们接下来需要写个systemd来控制nginx，<code>vim /etc/systemd/system/nginx.service</code></p>
-<pre class="line-numbers language-none"><code class="language-none">[Unit] Description&#x3D;Nginx HTTP Server [Service] Type&#x3D;forking PIDFile&#x3D;&#x2F;var&#x2F;run&#x2F;nginx.pid ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx ExecReload&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s reload ExecStop&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s quit User&#x3D;root Group&#x3D;root KillMode&#x3D;process Restart&#x3D;on-failure [Install] WantedBy&#x3D;multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">[Unit] Description&#x3D;Nginx HTTP Server [Service] Type&#x3D;forking PIDFile&#x3D;&#x2F;var&#x2F;run&#x2F;nginx.pid ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx ExecReload&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s reload ExecStop&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s quit User&#x3D;root Group&#x3D;root KillMode&#x3D;process Restart&#x3D;on-failure [Install] WantedBy&#x3D;multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>8.保存退出，重载systemctl<code>systemctl daemon-reload</code></p>
 <h2 id="配置nginx-stream"><a href="#配置nginx-stream" class="headerlink" title="配置nginx stream"></a>配置nginx stream</h2><p>1.新建个配置文件，例如，<code>vim /etc/nginx/site-enable/proxy_domain_com</code>，写入如下，保存退出</p>
 <pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
@@ -453,7 +439,18 @@
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>证书文件使用自签名的就完全OK了</p>
 <p>5.这样一个无损代理挖矿流量的中转就完成了，让您无惧第三方黑心不良抽水！</p>
-
+<p>6.负载均衡类似，添加多个后台server即可，如下</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
+    upstream f2pool &#123;
+        server cfxssl.f2pool.com:6820;
+        server cfxssl.f2pool.com:6821;
+        server cfxssl.f2pool.com:6822;
+    &#125;
+        server &#123;
+            listen  6820;
+            proxy_pass  f2pool;
+        &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
