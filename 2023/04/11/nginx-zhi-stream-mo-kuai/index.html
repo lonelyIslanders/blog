@@ -412,7 +412,7 @@
 <p>7.后续nginx可执行文件在<code>/usr/sbin/nginx</code>，我们接下来需要写个systemd来控制nginx，<code>vim /etc/systemd/system/nginx.service</code></p>
 <pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">[Unit] Description&#x3D;Nginx HTTP Server [Service] Type&#x3D;forking PIDFile&#x3D;&#x2F;var&#x2F;run&#x2F;nginx.pid ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx ExecReload&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s reload ExecStop&#x3D;&#x2F;usr&#x2F;sbin&#x2F;nginx -s quit User&#x3D;root Group&#x3D;root KillMode&#x3D;process Restart&#x3D;on-failure [Install] WantedBy&#x3D;multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>8.保存退出，重载systemctl<code>systemctl daemon-reload</code></p>
-<h2 id="配置nginx-stream"><a href="#配置nginx-stream" class="headerlink" title="配置nginx stream"></a>配置nginx stream</h2><p>1.新建个配置文件，例如，<code>vim /etc/nginx/site-enable/proxy_domain_com</code>，写入如下，保存退出</p>
+<h2 id="配置nginx-stream"><a href="#配置nginx-stream" class="headerlink" title="配置nginx stream"></a>配置nginx stream</h2><p>1.stream模块是nginx的顶层模块，须在nginx.conf中定义<br>2.打开配置文件，<code>vim /etc/nginx/nginx.conf</code>，在event模块和http模块之间写入如下，保存退出</p>
 <pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">stream &#123;
     upstream f2pool &#123;
         server cfxssl.f2pool.com:6820;
