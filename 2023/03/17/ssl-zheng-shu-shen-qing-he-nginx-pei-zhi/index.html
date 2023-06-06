@@ -398,7 +398,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。<br>一般证书分为信任机构或组织颁发的证书和自签名证书。<br>证书简单再分又有RSA和ECC加密格式<br>还有单域名回泛域名证书……<br>我们以<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a>为例，申请一个泛域名证书</p>
+                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。<br>一般证书分为信任机构或组织颁发的证书和自签名证书。<br>证书简单再分又有RSA和ECC加密格式<br>还有单域名回泛域名证书……<br>我们以<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a>为例，申请一个泛域名证书<br>acme申请的证书后会自动创建一个crontab任务，每天检查证书有效期，到期会自动续签，所以申请和配置成功即完成</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1.具体安装方式可以查看其README，这里以在线安装为例<br>敲入<code>curl https://get.acme.sh | sh -s email=my@example.com</code>即可，稍后创建<code>/root/.acme/</code>文件夹，所有的操作步骤都在这里进行</p>
 <p>2.设置域名服务商的DNS Keys(API Keys)，如阿里云的<a target="_blank" rel="noopener" href="https://ram.console.aliyun.com/users">Keys</a><br>具体其他域名服务商请看<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi">这里</a></p>
 <p>3.得到Keys对后，输入如下，请注意替换，这里是阿里云为例！</p>
