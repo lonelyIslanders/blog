@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SSL证书申请和Nginx配置, 比特牛牛">
-    <meta name="description" content="说明证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。一般证书分为信任机构或组织颁发的证书和自签名证书。证书简单再分又有RSA和ECC加密格式还有单域名回泛域名证书……我们以acme.sh为例，
-">
+    <meta name="description" content="说明证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。一般证书分为信任机构或组织颁发的证书和自签名证书。证书简单再分又有RSA和ECC加密格式还有单域名回泛域名证书……我们以acme.sh为例，申请一个泛域名证">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -399,7 +398,47 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。<br>一般证书分为信任机构或组织颁发的证书和自签名证书。<br>证书简单再分又有RSA和ECC加密格式<br>还有单域名回泛域名证书……<br>我们以<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a>为例，</p>
+                <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>证书，说白了就是加密http流量成为https加密流量的东西，从裸奔到铠甲合体。<br>一般证书分为信任机构或组织颁发的证书和自签名证书。<br>证书简单再分又有RSA和ECC加密格式<br>还有单域名回泛域名证书……<br>我们以<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a>为例，申请一个泛域名证书</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1.具体安装方式可以查看其README，这里以在线安装为例<br>敲入<code>curl https://get.acme.sh | sh -s email=my@example.com</code>即可，稍后创建<code>/root/.acme/</code>文件夹，所有的操作步骤都在这里进行</p>
+<p>2.设置域名服务商的DNS Keys(API Keys)，如阿里云的<a target="_blank" rel="noopener" href="https://ram.console.aliyun.com/users">Keys</a><br>具体其他域名服务商请看<a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi">这里</a></p>
+<p>3.得到Keys对后，输入如下，请注意替换，这里是阿里云为例！</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">export Ali_Key&#x3D;&quot;sdfsdfsdfljlbjkljlkjsdfoiwje&quot;
+export Ali_Secret&#x3D;&quot;jlsdflanljkljlfdsaklkjflsa&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>4.接下来就简单了，直接执行如下，这里也是注意替换！</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /root/.acme/
+./acme.sh <span class="token parameter variable">--issue</span> <span class="token parameter variable">--dns</span> dns_ali <span class="token parameter variable">-d</span> yourdomain.com <span class="token parameter variable">-d</span> *.yourdomain.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>5.大概两分钟左右即可完成证书申请，结果如下图<br><img src="https://i.imgloc.com/2023/06/06/VlGkRo.png" alt="完成图"></p>
+<p>6.copy证书到nginx的证书目录，假设我们这里是<code>/var/www/ssl/</code>,则我们输入如下命令，这里也是注意替换！<br><code> ./acme.sh --install-cert -d yourdomain.com --cert-file /var/www/ssl/yourdomain.com.crt --key-file /var/www/ssl/yourdomain.com.pem --fullchain-file /var/www/ssl/yourdomain.com.fullchain.crt</code></p>
+<p>7.证书会被copy到指定目录，这时候编辑nginx配置文件，如下一个二级域名的配置文件</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">server &#123;
+    listen 80;
+    server_name release.yourdomain.com;
+    location &#x2F; &#123;
+        index  index.html;
+        try_files  $uri $uri&#x2F; &#x2F;index.html;
+        return 301 https:&#x2F;&#x2F;$server_name$request_uri;
+    &#125;
+&#125;
+server &#123;
+    listen 443 ssl;
+    root &#x2F;var&#x2F;www&#x2F;html&#x2F;release&#x2F;;
+    index index.html index.htm index.nginx-debian.html;
+    server_name release.yourdomain.com;
+
+    ssl_certificate &#x2F;var&#x2F;www&#x2F;ssl&#x2F;yourdomain.com.fullchain.crt;
+    ssl_certificate_key &#x2F;var&#x2F;www&#x2F;ssl&#x2F;yourdomain.com.pem;
+
+    #enables all versions of TLS, but not SSLv2 or 3 which are weak and now deprecated.
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    #Disables all weak ciphers
+    ssl_ciphers &quot;ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4&quot;;
+    ssl_prefer_server_ciphers on;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>8.保存退出使用<code>nginx -t</code>测试无误后重启nginx即可</p>
 
                 
             </div>
