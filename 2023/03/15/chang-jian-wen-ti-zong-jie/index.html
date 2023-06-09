@@ -411,6 +411,16 @@
                    <span class="token function">ress</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">email</span><span class="token operator">:</span> email<span class="token punctuation">,</span> <span class="token literal-property property">password</span><span class="token operator">:</span> password <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
                <span class="token punctuation">&#125;</span>
            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="6-启动nginx报错nginx-emerg-“server”-directive-is-not-allowed-here"><a href="#6-启动nginx报错nginx-emerg-“server”-directive-is-not-allowed-here" class="headerlink" title="6. 启动nginx报错nginx: [emerg] “server” directive is not allowed here"></a>6. 启动nginx报错nginx: [emerg] “server” directive is not allowed here</h2><p>这个需要在<code>/etc/nginx/nginx.conf</code>中的http块中将其他配置文件include声明提前，最好放到前面，如下部分conf</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">http &#123;
+    include       mime.types;
+    default_type  application&#x2F;octet-stream;
+
+    include &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;*.conf;
+    include &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;*;
+    ...
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
